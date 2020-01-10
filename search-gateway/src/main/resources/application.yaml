@@ -1,0 +1,30 @@
+server:
+  port: 8086
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  health:
+    elasticsearch:
+      enabled: false
+spring:
+  application:
+    name: mfw-search-gateway-apm
+  cloud:
+    nacos: #采用nacos注册中心
+      discovery:
+        enabled: true
+        register-enabled: true
+        namespace: 6947fa15-b976-45f4-b121-4c05e802e89a
+        endpoint: 'nacosendpoint.mtech.svc.ab:80'
+    sentinel:
+      transport:
+        port: 8720
+        dashboard: 172.18.8.19:8082
+    gateway:
+      # 设置与服务注册发现组件结合，这样可以采用服务名的路由策略
+      discovery:
+        locator:
+          enabled: true

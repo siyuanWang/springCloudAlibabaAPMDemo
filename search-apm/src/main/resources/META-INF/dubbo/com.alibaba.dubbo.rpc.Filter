@@ -1,0 +1,2 @@
+dubbo.apm.consumer=com.wsy.apm.core.dubbo.DubboConsumerApmFilter
+dubbo.apm.provider=com.wsy.apm.core.dubbo.DubboProviderApmFilter

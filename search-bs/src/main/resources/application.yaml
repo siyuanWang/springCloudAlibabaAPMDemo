@@ -1,0 +1,56 @@
+#dubbo核心配置
+dubbo:
+  scan:
+    base-packages: com.wsy.apm.bs
+  protocol:
+    name: dubbo
+    port: 20881
+    serialization: hessian2
+  registry:
+    address: nacos://127.0.0.1:8848?endpoint=nacosendpoint.mtech.svc.ab&namespace=6947fa15-b976-45f4-b121-4c05e802e89a
+  provider:
+    retries: 0 #远程服务重试次数，不包括第一次调用
+    delay: -1 #延迟注册服务时间(毫秒)- ，设为-1时，表示延迟到Spring容器初始化完成时暴露服务
+    group: default-search
+  consumer:
+    lazy: true #是否懒加载
+    timeout: 1000 #服务调用超时时间
+    check: true
+    loadbalance: random
+  cloud:
+    subscribed-services: search-bs-apm
+
+
+server:
+  port: 8088
+
+#监控点配置
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  health:
+    elasticsearch:
+      enabled: false
+
+
+spring:
+  application:
+    name: search-bs-apm #应用名。很重要！是注册中心的主键，gateway路由也需要靠它
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    nacos: #采用nacos注册中心
+      discovery:
+        enabled: true
+        register-enabled: true
+        namespace: 6947fa15-b976-45f4-b121-4c05e802e89a
+        endpoint: 'nacosendpoint.mtech.svc.ab:80'
+    sentinel: #采用sentinel作为限流熔断
+      transport:
+        port: 8720
+        dashboard: 172.18.8.19:8082
+ribbon:
+  nacos:
+    enabled: true
