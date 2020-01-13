@@ -47,7 +47,7 @@ public class ApmAspect {
                 return traceId;
             });
             transaction.setName(StringUtils.isNotBlank(transactionWithRemoteParent.name())
-                    ? transactionWithRemoteParent.name() : signature.getName());
+                    ? transactionWithRemoteParent.name() : signature.getMethod().getDeclaringClass().getName() + "#" + signature.getMethod().getName());
             transaction.setType(Transaction.TYPE_REQUEST);
             return joinPoint.proceed();
         } catch (Throwable throwable) {

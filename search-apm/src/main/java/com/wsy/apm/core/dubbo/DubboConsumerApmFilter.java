@@ -3,6 +3,7 @@ package com.wsy.apm.core.dubbo;
 import co.elastic.apm.api.ElasticApm;
 import co.elastic.apm.api.Scope;
 import co.elastic.apm.api.Transaction;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.dubbo.common.extension.Activate;
 import org.apache.dubbo.rpc.*;
 import org.slf4j.Logger;
@@ -21,8 +22,10 @@ public class DubboConsumerApmFilter implements Filter {
             return traceId;
         });
         try (final Scope scope = transaction.activate()) {
-            transaction.setName("com.wsy.apm.us.DubboConsumerApmFilter#invoke");
+            String name = "consumer:" + invocation.getInvoker().getInterface().getName() + "#" + invocation.getMethodName();
+            transaction.setName(name);
             transaction.setType(Transaction.TYPE_REQUEST);
+
             Result result = invoker.invoke(invocation);
 
             return result;

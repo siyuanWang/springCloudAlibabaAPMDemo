@@ -15,9 +15,7 @@ public class DubboProviderApmFilter implements Filter {
         Transaction transaction = ElasticApm.startTransactionWithRemoteParent(key -> invocation.getAttachment(key));
 
         try (final Scope scope = transaction.activate()) {
-            String[] interfaceArr = invocation.getAttachment("interface").split("\\.");
-            String className = interfaceArr[interfaceArr.length - 1];
-            String name = className + "#" + invocation.getMethodName();
+            String name = "provider:" + invocation.getInvoker().getInterface().getName() + "#" + invocation.getMethodName();
             transaction.setName(name);
             transaction.setType(Transaction.TYPE_REQUEST);
             return invoker.invoke(invocation);
