@@ -30,7 +30,6 @@
         <flink.version>1.9.1</flink.version>
         <scala.binary.version>2.11</scala.binary.version>
         <jacoco.version>0.8.3</jacoco.version>
-        <algorithm.version>2.0.0</algorithm.version>
     </properties>
 
     <dependencyManagement>
@@ -43,13 +42,6 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-
-            <dependency>
-                <groupId>com.mafengwo.algorithm</groupId>
-                <artifactId>algorithm-client</artifactId>
-                <version>${algorithm.version}</version>
-            </dependency>
-
             <!-- Spring Cloud Alibaba dependencies -->
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>
