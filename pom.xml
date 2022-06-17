@@ -26,7 +26,7 @@
         <spring-cloud-consul.version>2.1.2.RELEASE</spring-cloud-consul.version>
         <curator.version>4.0.1</curator.version>
         <spring-cloud.version>Greenwich.SR3</spring-cloud.version>
-        <fastjson.version>1.2.31</fastjson.version>
+        <fastjson.version>1.2.83</fastjson.version>
         <flink.version>1.9.1</flink.version>
         <scala.binary.version>2.11</scala.binary.version>
         <jacoco.version>0.8.3</jacoco.version>
